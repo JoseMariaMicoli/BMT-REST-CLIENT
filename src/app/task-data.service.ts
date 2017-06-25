@@ -1,60 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
+import { ApiService } from './api.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TaskDataService {
 
-  lastId: number = 0;
-
-  tasks: Task[] = [];
-
-  constructor() { 
+  constructor(private api: ApiService) { 
 
   }
 
-  addTask(task: Task): TaskDataService {
-  	if(!task.id) {
-  		task.id = ++this.lastId;
-  	}
-
-  	this.tasks.push(task);
-
-  	return this;
+  addTask(task: Task): Observable<Task> {
+    return this.api.createTask(task);	
   }
 
-  deleteTaskById(id: number): TaskDataService {
-  	this.tasks = this.tasks
-  	.filter(task => task.id !== id);
-
-  	return this;
+  deleteTaskById(taskId: number): Observable<Task> {
+  	return this.api.deleteTaskById(taskId);
   }
 
-  updateTaskById(id: number, values: Object = {}): Task {
-  	let task = this.getTaskById(id);
-  	if(!task) {
-  		return null;
-  	}
-
-  	Object.assign(task, values);
-
-  	return task;
+  updateTaskById(task: Task): Observable<Task> {
+  	return this.api.updateTask(task);
   }
 
-  getAllTasks(): Task[] {
-  	return this.tasks;
+  getAllTasks(): Observable<Task[]> {
+  	return this.api.getAllTasks();
   }
 
-  getTaskById(id: number): Task {
-  	return this.tasks
-  	.filter(task => task.id === id).pop();
+  getTaskById(taskId: number): Observable<Task> {
+  	return this.api.getTaskById(taskId);
   }
 
   toggleTaskComplete(task: Task) {
-  	let updatedTask = this.updateTaskById(task.id, {
-  		status: !task.status
-  	});
+  	task.status = !task.status;
 
-  	return updatedTask;
+    return this.api.updateTask(task);
   }
 
 }
