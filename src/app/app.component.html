@@ -1,20 +1,6 @@
 <section class="todoapp">
-  <header class="app-todo-list-header">
-    <h1>Tasks</h1>
-    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTask.name" (keyup.enter)="addTask()">
-  </header>
-  <section class="main" *ngIf="tasks.length > 0">
-    <ul class="todo-list">
-      <li *ngFor="let task of tasks" [class.status]="task.status">
-        <div class="view">
-          <input class="toggle" type="checkbox" (click)="toggleTaskComplete(task)" [checked]="task.status">
-          <label>{{task.name}}</label>
-          <button class="destroy" (click)="removeTask(task)"></button>
-        </div>
-      </li>
-    </ul>
-  </section>
-  <footer class="footer" *ngIf="tasks.length > 0">
-    <span class="todo-count"><strong>{{tasks.length}}</strong> {{tasks.length == 1 ? 'item' : 'items'}} left</span>
-  </footer>
+  <app-task-list-header (add)="onAddTask($event)"></app-task-list-header>
+  <app-task-list [tasks]="tasks" (toggleComplete)="onToggleTaskComplete($event)"
+                 (remove)="onRemoveTask($event)"></app-task-list>
+   <app-task-list-footer [tasks]="tasks"></app-task-list-footer>
 </section>

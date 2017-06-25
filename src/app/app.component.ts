@@ -5,26 +5,24 @@ import { TaskDataService } from './task-data.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css', '../../node_modules/todomvc-app-css/index.css', '../../node_modules/todomvc-common/base.css'],
-  providers: [TaskDataService]
+  styleUrls: ['./app.component.css'],
+  providers: []
 })
 export class AppComponent {
-  
-  newTask: Task = new Task();
 
   constructor(private taskDataService: TaskDataService) {
 
   }
 
-  addTask() {
-  	this.taskDataService.addTask(this.newTask);
+  onAddTask(task: Task) {
+  	this.taskDataService.addTask(task);
   }
 
-  toggleTaskComplete(task) {
+  onToggleTaskComplete(task) {
   	this.taskDataService.toggleTaskComplete(task);
   }
 
-  removeTask(task) {
+  onRemoveTask(task) {
   	this.taskDataService.deleteTaskById(task.id);
   }
 
