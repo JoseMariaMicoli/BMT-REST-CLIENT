@@ -16,8 +16,8 @@ export class TaskListHeaderComponent implements OnInit {
   constructor() { }
 
   addTask() {
-  	this.add.emit(this.newTask);
-  	this.newTask = new Task();
+    this.add.emit(this.newTask);
+    this.newTask = new Task();
   }
 
   ngOnInit() {

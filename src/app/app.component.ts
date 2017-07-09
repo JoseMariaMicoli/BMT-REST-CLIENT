@@ -23,19 +23,19 @@ export class AppComponent implements OnInit {
   }
 
   onAddTask(task: Task) {
-  	this.taskDataService.addTask(task).subscribe((newTask) => {
+    this.taskDataService.addTask(task).subscribe((newTask) => {
       this.tasks = this.tasks.concat(newTask);
     });
   }
 
   onToggleTaskComplete(task) {
-  	this.taskDataService.toggleTaskComplete(task).subscribe((updatedTask) => {
+    this.taskDataService.toggleTaskComplete(task).subscribe((updatedTask) => {
       task = updatedTask;
     });
   }
 
   onRemoveTask(task) {
-  	this.taskDataService.deleteTaskById(task.id).subscribe((_) => {
+    this.taskDataService.deleteTaskById(task.id).subscribe((_) => {
       this.tasks = this.tasks.filter((t) => t.id !== task.id);
     });
   }

@@ -1,9 +1,9 @@
 export class Task {
-	id: number;
-	name: string = '';
-	status: boolean = false;
+  id: number;
+  name = '';
+  status = false;
 
-	constructor(values: Object = {}) {
-		Object.assign(this, values);
-	}
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
 }

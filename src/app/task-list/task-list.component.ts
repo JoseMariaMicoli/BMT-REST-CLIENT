@@ -20,11 +20,11 @@ export class TaskListComponent implements OnInit {
   constructor() { }
 
   onToggleTaskComplete(task: Task) {
-  	this.toggleComplete.emit(task);
+    this.toggleComplete.emit(task);
   }
 
   onRemoveTask(task: Task) {
-  	this.remove.emit(task);
+    this.remove.emit(task);
   }
 
   ngOnInit() {
